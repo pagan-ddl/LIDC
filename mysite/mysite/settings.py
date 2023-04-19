@@ -73,13 +73,53 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+## 将 Django 默认的数据库 sqlite3 的信息注释掉或删除，切换为达梦数据库：
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django_dmPython',  # 数据库驱动;
+        'NAME': 'DAMENG',             # 数据库名;
+        'USER': 'DJANGO',             # 数据存放的用户名;
+        'PASSWORD': 'DJANGO123',      # 口令;
+        'HOST': '192.168.222.221',    # 数据库服务器IP/主机名;
+        'PORT': '5236',               # 数据库服务端口号;
+        'OPTIONS': {'local_code': 1, 'connection_timeout': 5}
     }
 }
-
+ 
+ 
+## 添加访问地址列表：
+ALLOWED_HOSTS = ['192.168.222.222','127.0.0.1']
+ 
+ 
+## 添加应用：
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # 加入以下内容：'myapp.apps.MyappConfig'告诉 Django ，MyappConfig 是 myapp/apps.py 文件中定义的一个应用配置的类。
+    'myapp.apps.MyappConfig',
+]
+ 
+ 
+## 设置语言和时区：
+LANGUAGE_CODE = 'zh-hans'
+ 
+TIME_ZONE = 'Asia/Shanghai'
+ 
+USE_I18N = True
+ 
+USE_L10N = True
+ 
+USE_TZ = False
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -105,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC-8'
 
 USE_I18N = True
 
